@@ -2,11 +2,11 @@ let time_id = 0;
 let form = document.getElementById('get-info-form');
 
 const fetchWeatherInfo = async (city) => {
-  const API_KEY = '0e39092912160b2c6e5dd4c2dbba3fcd';
+  const API_KEY = 'bf7f97a77c75b169f9ceb8267edbc2db';
   const URL = `http://api.weatherstack.com/current?access_key=${API_KEY}&query=${city}`;
-
+  console.log(URL);
   const res = await fetch(URL, {
-    method: 'GET',
+    method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
@@ -15,7 +15,7 @@ const fetchWeatherInfo = async (city) => {
   const data = await res.json();
   console.log(data);
   if (data.success === false) {
-    alert("Sorry, we couldn't find the city you're looking for");
+    alert(data.error.info);
     console.log(data.error.info);
     return;
   } else {
@@ -38,12 +38,11 @@ const handleFormSubmit = (event) => {
 };
 
 const updateUI = (current, location, request) => {
-  // data of card 1
   let cardTitle = document.getElementsByClassName('card-title');
   let weather_icon = document.getElementsByClassName('weather-icon');
   let weather_type = document.getElementsByClassName('weather-type');
   let temperature = document.getElementsByClassName('temperature');
-  // data of card 2
+
   let last_updated = document.getElementsByClassName('last-updated');
   let uv_index = document.getElementsByClassName('uv-index');
   let pressure = document.getElementsByClassName('pressure');
