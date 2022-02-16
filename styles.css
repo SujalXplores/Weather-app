@@ -62,3 +62,7 @@ body {
 [class*=" bi-"]::before {
   font-size: 1.3em;
 }
+
+.border {
+  border-width: 2px !important;
+}
