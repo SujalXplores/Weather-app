@@ -1,0 +1,81 @@
+<section
+  class='container weather-card row justify-content-center mt-5 mx-auto gy-5'
+>
+  <!-- card weather -->
+  <div class='col-sm-6 d-flex'>
+    <div class='w-100 card text-center border border-warning'>
+      <div class='card-body'>
+        <h5 class='card-title'>{{location}}, {{region}}, {{country}}</h5>
+        <div class='row'>
+          <div class='col-sm-4'>
+            <img alt='Weather Icon' class='weather-icon' src='https://weatherstack.com/site_images/weather_icon_{{icon}}.svg' />
+            <p class='weather-type'>{{weather}}</p>
+          </div>
+          <div
+            class='col-sm-8 d-flex justify-content-center align-items-center'
+          >
+            <p class='card-text temperature'>{{temperature}}&deg;C</p>
+          </div>
+        </div>
+      </div>
+      <div class='card-footer fw-bold time'></div>
+    </div>
+  </div>
+
+  <!-- card more info -->
+  <div class='col-sm-6'>
+    <div class='card border border-warning p-3'>
+      <h5 class='card-title p-3 m-0'>More Info</h5>
+      <div class='list-group border-0'>
+        <div
+          class='list-group-item bg-transparent text-white d-flex justify-content-between'
+        >
+          <span class='last-updated'>Last Updated: {{last_updated}}</span>
+          <i class='bi bi-clock-history'></i>
+        </div>
+        <div
+          class='list-group-item bg-transparent text-white d-flex justify-content-between'
+        >
+          <span class='uv-index'>UV Index: {{uv_index}}</span>
+          <i class='bi bi-speedometer'></i>
+        </div>
+        <div
+          class='list-group-item bg-transparent text-white d-flex justify-content-between'
+        >
+          <span class='pressure'>Pressure: {{pressure}}</span>
+          <i class='bi bi-arrows-collapse'></i>
+        </div>
+        <div
+          class='list-group-item bg-transparent text-white d-flex justify-content-between'
+        >
+          <span class='visibility'>Visibility: {{visibility}}</span>
+          <i class='bi bi-binoculars'></i>
+        </div>
+        <div
+          class='list-group-item bg-transparent text-white d-flex justify-content-between'
+        >
+          <span class='wind-speed'>Wind Speed: {{wind_speed}}</span>
+          <i class='bi bi-wind'></i>
+        </div>
+        <div
+          class='list-group-item bg-transparent text-white d-flex justify-content-between'
+        >
+          <span class='wind-direction'>Wind Direction: {{wind_direction}}</span>
+          <i class='bi bi-compass'></i>
+        </div>
+        <div
+          class='list-group-item bg-transparent text-white d-flex justify-content-between'
+        >
+          <span class='wind-degree'>Wind Degree: {{wind_degree}}</span>
+          <i class='bi bi-cursor'></i>
+        </div>
+        <div
+          class='list-group-item bg-transparent text-white d-flex justify-content-between'
+        >
+          <span class='humidity'>Humidity: {{humidity}}</span>
+          <i class='bi bi-droplet'></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
