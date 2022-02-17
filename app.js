@@ -2,9 +2,8 @@ let time_id = 0;
 let form = document.getElementById('get-info-form');
 
 const fetchWeatherInfo = async (city) => {
-  const API_KEY = 'bf7f97a77c75b169f9ceb8267edbc2db';
-  const URL = `http://api.weatherstack.com/current?access_key=${API_KEY}&query=${city}`;
-  console.log(URL);
+  const API_KEY = '8c853592195e48dea7842707221702';
+  const URL = `https://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${city}`;
   const res = await fetch(URL, {
     method: 'POST',
     headers: {
@@ -14,16 +13,16 @@ const fetchWeatherInfo = async (city) => {
 
   const data = await res.json();
   console.log(data);
-  if (data.success === false) {
-    alert(data.error.info);
-    console.log(data.error.info);
+  if (data.error) {
+    alert(data.error.message);
+    console.log(data.error);
     return;
   } else {
     clearInterval(time_id);
     time_id = setInterval(() => {
-      updateTime(data.location.timezone_id);
+      updateTime(data.location.tz_id);
     }, 1000);
-    updateUI(data.current, data.location, data.request);
+    updateUI(data.current, data.location);
   }
 };
 
@@ -37,7 +36,7 @@ const handleFormSubmit = (event) => {
   fetchWeatherInfo(city);
 };
 
-const updateUI = (current, location, request) => {
+const updateUI = (current, location) => {
   let cardTitle = document.getElementsByClassName('card-title');
   let weather_icon = document.getElementsByClassName('weather-icon');
   let weather_type = document.getElementsByClassName('weather-type');
@@ -53,19 +52,19 @@ const updateUI = (current, location, request) => {
   let humidity = document.getElementsByClassName('humidity');
 
   const [iconClass, weatherDescription] = weatherDescriptionToClass(
-    current.weather_descriptions[0]
+    current.condition.text
   );
 
   cardTitle[0].innerHTML = `${location.name}, ${location.region}, ${location.country}`;
   weather_icon[0].src = `https://weatherstack.com/site_images/weather_icon_${iconClass}.svg`;
   weather_type[0].innerHTML = weatherDescription;
-  temperature[0].innerHTML = `${current.temperature}&deg;C`;
+  temperature[0].innerHTML = `${current.temp_c}&deg;C`;
 
-  last_updated[0].innerHTML = `Last Updated: ${current.observation_time}`;
-  uv_index[0].innerHTML = `UV Index: ${current.uv_index}`;
-  pressure[0].innerHTML = `Pressure: ${current.pressure}`;
-  visibility[0].innerHTML = `Visibility: ${current.visibility}`;
-  wind_speed[0].innerHTML = `Wind Speed: ${current.wind_speed} kmph`;
+  last_updated[0].innerHTML = `Last Updated: ${current.last_updated}`;
+  uv_index[0].innerHTML = `UV Index: ${current.uv}`;
+  pressure[0].innerHTML = `Pressure: ${current.pressure_mb}mb`;
+  visibility[0].innerHTML = `Visibility: ${current.vis_km}`;//
+  wind_speed[0].innerHTML = `Wind Speed: ${current.wind_kph} kph`;
   wind_direction[0].innerHTML = `Wind Direction: ${current.wind_dir}`;
   wind_degree[0].innerHTML = `Wind Degree: ${current.wind_degree}`;
   humidity[0].innerHTML = `Humidity: ${current.humidity}`;
