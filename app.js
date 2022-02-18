@@ -1,5 +1,5 @@
 let template = Handlebars.templates.weather_cards;
-let time_id = 0;
+let timeId = 0;
 let form = document.getElementById('get-info-form');
 
 const fetchWeatherInfo = async (city) => {
@@ -19,8 +19,8 @@ const fetchWeatherInfo = async (city) => {
     console.log(data.error);
     return;
   } else {
-    clearInterval(time_id);
-    time_id = setInterval(() => {
+    clearInterval(timeId);
+    timeId = setInterval(() => {
       updateTime(data.location.tz_id);
     }, 1000);
     updateUI(data.current, data.location);
@@ -49,13 +49,13 @@ const updateUI = (current, location) => {
     icon: iconClass,
     weather: weatherDescription,
     temperature: current.temp_c,
-    last_updated: current.last_updated,
-    uv_index: current.uv,
+    lastUpdated: current.last_updated,
+    uvIndex: current.uv,
     pressure: current.pressure_mb,
     visibility: current.vis_km,
-    wind_speed: current.wind_kph,
-    wind_direction: current.wind_dir,
-    wind_degree: current.wind_degree,
+    windSpeed: current.wind_kph,
+    windDirection: current.wind_dir,
+    windDegree: current.wind_degree,
     humidity: current.humidity,
   });
 
@@ -113,8 +113,8 @@ const updateTime = (timezone) => {
     timeZone: timezone,
     hour12: true,
   });
-  let time_element = document.getElementsByClassName('time');
-  time_element[0].innerHTML = time;
+  let timeElement = document.getElementsByClassName('time');
+  timeElement[0].innerHTML = time;
 };
 
 form.addEventListener('submit', handleFormSubmit);
